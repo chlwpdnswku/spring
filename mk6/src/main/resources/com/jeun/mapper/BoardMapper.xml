@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeun.mapper.BoardMapper">
+
+	<resultMap id="PostMapping" type="com.jeun.domain.BoardVO">
+		<id column="id" property="id" />
+		<result column="title" property="title" jdbcType="VARCHAR"
+			javaType="String" />
+			
+		<result column="content" property="content" jdbcType="LONGVARCHAR"
+			javaType="String" />
+
+		<result column="author" property="author" jdbcType="VARCHAR"
+			javaType="String" />
+			
+		<result column="date_prop" property="dateProp" jdbcType="DATE"
+			javaType="DATE" />
+		
+		<result column="reg_date" property="regDate"
+			jdbcType="TIMESTAMP" javaType="Date" />
+			
+		<result column="update_date" property="updateDate"
+			jdbcType="TIMESTAMP" javaType="Date" />
+			
+	</resultMap>
+
+
+	<select id="getPostList" resultMap="PostMapping">
+		SELECT * from posts
+	</select>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		insert
+		into posts (title,content,author,date_prop)
+		values
+		(#{title},#{content},#{author},#{dateProp})
+	</insert>
+
+
+	<select id="searchPostId" resultMap="PostMapping">
+		select * FROM posts
+		where id= #{id}
+	</select>
+
+
+	<update id="update">
+		update posts
+		set title =#{title},
+			content =#{content},
+			date_prop =#{dateProp},
+			update_date = now()
+			where id = #{id}
+	</update>
+
+	<delete id="delete">
+		delete from posts
+		where id = #{id}
+	</delete>
+	
+	<!-- Pagingmapperxml mariadb query-->
+	
+	<select id="getPagingList" resultMap="PostMapping">
+		SELECT * 
+			FROM posts
+			LIMIT #{offset}, #{amount}
+	</select>
+
+
+</mapper>

@@ -1,0 +1,90 @@
+
+
+CREATE TABLE posts (
+	id INT NOT NULL AUTO_INCREMENT comment '번호',
+	title VARCHAR(100) NOT NULL comment '문자열이름 ',
+	content TEXT comment='내용적기',
+	author VARCHAR(50) NOT NULL comment '작성자',
+	date_prop DATE comment '날짜정보 ',
+	reg_date TIMESTAMP default NOW() comment '등록일시 ',
+	update_date TIMESTAMP default NOW() comment '수정일시',
+    PRIMARY KEY (id)
+);
+
+INSERT INTO posts (title, content, author,created_at) VALUES ('제목', '내용', '작성자',now());
+
+
+
+CREATE TABLE posts (
+    id INT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(100) NOT NULL,
+    content TEXT NOT NULL,
+    author VARCHAR(50) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
+select * from posts
+
+INSERT INTO posts (title, content, author) VALUES ('제목', '내용', '작성자');
+INSERT INTO posts (title, content, author,created_at) VALUES ('제목', '내용', '작성자',now());
+
+
+/*
+ * 
+ * 	user
+ * 
+ */
+
+drop TABLE user_info;
+
+select * FROM user_info;
+
+CREATE TABLE user_info (
+
+    id INT AUTO_INCREMENT comment '유저번호',
+	name VARCHAR(50) NOT NULL comment '유저 이름 ',
+	password VARCHAR(255) NOT NULL comment '비밀 번호 ',
+	birthday DATE comment '가입 날짜 정보 ',
+	reg_date TIMESTAMP default NOW() comment '등록일시 ',
+	
+    PRIMARY KEY (id)
+)
+
+insert into user_info (name ,password,birthday ,reg_datre)
+values('최제운','chlwpdns' , '1998-07-21' , now());
+
+-----tag -----
+
+
+CREATE TABLE post_tag(
+
+	id INT NOT NULL AUTO_INCREMENT comment 'tag_number',
+	word VARCHAR(100) NOT NULL comment 'word'
+	PRIMARY KEY (id)
+
+)
+
+insert into post_tag(word) values('men');
+insert into post_tag(word) values('woman');
+insert into post_tag(word) values('animal');
+
+
+
+CREATE TABLE mix_post_tag(
+
+	post_id INT NOT NULL ,
+	tag_id VARCHAR(100) NOT NULL,
+	PRIMARY KEY (post_id,tag_id)
+
+)
+
+insert into mix_post_tag(post_id,tag_id) values(3,1);
+insert into mix_post_tag(post_id,tag_id) values(3,3);
+insert into mix_post_tag(post_id,tag_id) values(2,1);
+
+
+
+
+
